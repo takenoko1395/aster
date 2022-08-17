@@ -1,15 +1,15 @@
 import React from 'react'
 import { Typography, AppBar, Toolbar } from '@mui/material'
 
-// type Props = {
-//   title: string,
-// }
+type Props = {
+  title: string,
+}
 
-const Header = () => {
+const Header = (props: Props) => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" >
       <Toolbar>
-        <Typography>pageProps.title</Typography>
+        <Typography>{props.title} </Typography>
       </Toolbar>
     </AppBar>
   )
