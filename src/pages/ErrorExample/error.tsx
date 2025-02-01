@@ -1,17 +1,7 @@
 // ErrorBoundaryComponent.tsx
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-
-// エラーが発生した際に表示するエラーメッセージ
-const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error resetErrorBoundary: () => void }) => {
-  return (
-    <div>
-      <h2>Something went wrong:</h2>
-      <p>{error.message}</p>
-      <button onClick={resetErrorBoundary}>Try again</button>
-    </div>
-  )
-}
+import { ErrorFallback } from '../../components/ErrorFallback'
 
 // エラーハンドリングが必要なコンポーネント
 const ErrorProneComponent = () => {
@@ -21,7 +11,10 @@ const ErrorProneComponent = () => {
 
 const ErrorBoundaryComponent: React.FC = () => {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => console.log('Error boundary reset!')}>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => console.log('Error boundary reset!')}
+    >
       <ErrorProneComponent />
     </ErrorBoundary>
   )
