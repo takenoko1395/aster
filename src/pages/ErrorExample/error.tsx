@@ -1,5 +1,4 @@
 // ErrorBoundaryComponent.tsx
-import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ErrorFallback } from '../../components/ErrorFallback'
 
@@ -9,7 +8,7 @@ const ErrorProneComponent = () => {
   // このコンポーネント内で発生したエラーは ErrorBoundary にキャッチされます
 }
 
-const ErrorBoundaryComponent: React.FC = () => {
+const ErrorBoundaryComponent = () => {
   return (
     <ErrorBoundary
       FallbackComponent={ErrorFallback}

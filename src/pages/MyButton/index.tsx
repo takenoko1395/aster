@@ -1,35 +1,35 @@
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button } from '@mui/material'
+import { AsterError } from '../../domain/model/core/error'
+import { useEffect, useState } from 'react'
 
 type Props = {
-  title: string;
+  title: string
 }
 
 export const MyButton = ({ title }: Props) => {
-  const onClick = () => {
+  const [error, setError] = useState<AsterError>()
 
-    try {
-      // ここで何かエラーが発生する可能性がある処理
-      if (title === 'I will throw an error on click') {
-        throw new Error('An error occurred in MyButton on click!');
-      }
-      // 通常のクリック処理
-      console.log('Button clicked!');
-    } catch (error) {
-      // エラー処理
-      console.error(error);
-      // ここでエラー処理を行う
+  const onClick = () => {
+    // ここで何かエラーが発生する可能性がある処理
+    if (title === 'I will throw an error on click') {
+      setError(
+        new AsterError('A123456', 'An error occurred in MyButton on click!')
+      )
     }
+    // 通常のクリック処理
+    console.log('Button clicked!')
   }
-  
+
+  useEffect(() => {
+    if (error) {
+      throw error
+    }
+  }, [error])
+
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Material-UI Button Example</h1>
-        <Link to="/App">
-          <Button onClick={onClick}>
-            {title}
-          </Button>
-        </Link>
+      <Button onClick={onClick}>{title}</Button>
     </div>
-  );
+  )
 }
