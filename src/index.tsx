@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { AsterRouter } from './router'
 import './index.css'
 import { ErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from './components/ErrorFallback'
+import { ErrorFallback } from './components/error/ErrorFallback'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -14,5 +14,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     >
       <AsterRouter />
     </ErrorBoundary>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

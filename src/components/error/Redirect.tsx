@@ -1,6 +1,5 @@
 import { Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { AsterError } from '../../domain/model/core/error'
 
 interface Props {
@@ -9,14 +8,11 @@ interface Props {
 }
 
 export const Redirect = ({ error, resetErrorBoundary }: Props) => {
-  const navigate = useNavigate()
-
   useEffect(() => {
     console.log('Redirectしたよ')
     // 3秒後に遷移
     const timer = setTimeout(() => {
       resetErrorBoundary()
-      navigate('/button') // /app に遷移
     }, 3000)
 
     // クリーンアップ処理（コンポーネントがアンマウントされた場合にタイマーをクリア）

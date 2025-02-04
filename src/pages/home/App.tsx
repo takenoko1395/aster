@@ -1,14 +1,14 @@
 import './App.css'
 import { ErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from '../../components/ErrorFallback'
 import { MyButton } from '../MyButton'
+import { Redirect } from '../../components/error/Redirect'
 
 function App() {
   return (
     <ErrorBoundary
-      FallbackComponent={ErrorFallback}
+      FallbackComponent={Redirect}
       onReset={() => console.log('Reset!')}
-      onError={() => console.log('２！！！')}
+      onError={() => console.log('')}
     >
       <div className="App">
         <header className="App-header">
@@ -16,7 +16,7 @@ function App() {
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
-          <MyButton title={'I will throw an error on click'} />
+          <MyButton title="I will throw an error on click" />
           <a
             className="App-link"
             href="https://reactjs.org"

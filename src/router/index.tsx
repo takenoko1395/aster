@@ -1,18 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import App from '../pages/app/App'
-import { MyButton } from '../pages/MyButton'
-import ErrorBoundaryComponent from '../pages/ErrorExample/error'
+import App from '../pages/home/App'
+import Identity from '../pages/identity'
+import Header from '../components/Header'
 
 export const AsterRouter = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
-        <Route path="/app" element={<App />} />
-        <Route
-          path="/button"
-          element={<MyButton title="I will throw an error on click" />}
-        />
-        <Route path="/" element={<ErrorBoundaryComponent />} />
+        <Route path="/home" element={<App />} />
+        <Route path="/identity" element={<Identity />} />
       </Routes>
     </BrowserRouter>
   )

@@ -13,7 +13,7 @@ export const MyButton = ({ title }: Props) => {
     // ここで何かエラーが発生する可能性がある処理
     if (title === 'I will throw an error on click') {
       setError(
-        new AsterError('A123456', 'An error occurred in MyButton on click!')
+        new AsterError('A123456', 'An error occurred in MyButton on click!'),
       )
     }
     // 通常のクリック処理

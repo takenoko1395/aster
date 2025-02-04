@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material'
-import { AsterError } from '../domain/model/core/error'
+import { AsterError } from '../../domain/model/core/error'
 
 interface Props {
   error: AsterError
