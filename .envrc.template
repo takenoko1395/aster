@@ -1,0 +1,6 @@
+export AWS_ACCESS_KEY=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_DEFAULT_REGION=ap-north-east-1
+export VITE_COGNITO_USER_POOL=ap-northeast-1_oa9llasba
+export VITE_COGNITO_CLIENT_ID=6ribn74dvoe761u0v6uoqhi9qo
+export VITE_COGNITO_REDIRECT_URI=https://d84l1y8p4kdic.cloudfront.net

@@ -9,9 +9,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:@stylistic/recommended-extends',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@stylistic'],
+  plugins: ['react-refresh', '@stylistic', "react"],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -22,20 +22,24 @@ module.exports = {
       'error',
       '1tbs', // } else { 書き方を要求する
     ],
+    'react-hooks/exhaustive-deps': 'off',
+    '@stylistic/indent': ['error', 2],
     '@typescript-eslint/no-misused-promises': [
       'error',
       // https://github.com/orgs/react-hook-form/discussions/9325#discussioncomment-4060566
       // https://typescript-eslint.io/rules/no-misused-promises/#checksvoidreturn
-      { checksVoidReturn: {
-        arguments: false,
-        attributes: false,
-      } },
-    ],
+      {
+        checksVoidReturn: {
+          arguments: false,
+          attributes: false,
+        }
+      },
+    ]
   },
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
   },
 }
