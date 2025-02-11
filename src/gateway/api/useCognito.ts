@@ -1,4 +1,5 @@
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute } from 'amazon-cognito-identity-js'
+import { AsterError, AsterErrorCode } from '../../domain/model/core/error'
 
 export const useCognito = () => {
   const userPool = new CognitoUserPool({
@@ -20,8 +21,7 @@ export const useCognito = () => {
       // 登録がエラーとなった場合の処理を実装
       if (err) {
         console.log(err)
-        alert(JSON.stringify(err))
-        return
+        throw new Error(JSON.stringify(err))
       }
       // 登録が成功した場合の処理を実装（E-mailは未認証）
       if (result) {
@@ -35,24 +35,20 @@ export const useCognito = () => {
   }
 
   const confirm = (email: string, code: string) => {
-    const userData = {
-      Username: email,
-      Pool: userPool,
-    }
+    return new Promise((resolve, reject) => {
+      const userData = {
+        Username: email,
+        Pool: userPool,
+      }
 
-    new CognitoUser(userData).confirmRegistration(
-      code,
-      true,
-      (err, result) => {
-        // E-mail認証がエラーとなった場合の処理を実装
+      new CognitoUser(userData).confirmRegistration(code, true, (err, result) => {
         if (err) {
-          alert(JSON.stringify(err))
+          reject(new AsterError(AsterErrorCode.UNEXPECTED, 'E-mail verification failed')) // 🔹 reject でエラーを渡す
           return
         }
-        // E-mail認証が成功した場合の処理を実装
-        console.log(result)
-      },
-    )
+        resolve(result) // 🔹 成功時に Promise を解決
+      })
+    })
   }
 
   const signIn = (email: string, password: string) => {
@@ -83,7 +79,7 @@ export const useCognito = () => {
         },
         onFailure: (err) => {
           // ログイン失敗時の処理を実装する
-          alert(JSON.stringify(err))
+          throw new Error(JSON.stringify(err))
         },
       },
     )
