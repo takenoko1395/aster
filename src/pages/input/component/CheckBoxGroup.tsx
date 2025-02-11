@@ -1,6 +1,13 @@
 import { useFormContext, Controller } from 'react-hook-form'
-import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material'
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText } from '@mui/material'
 import { InputFormSchema } from '../types'
+
+// チェックボックスのオプションリスト
+const checkBoxOptions = [
+  { name: 'coding', label: 'Coding' },
+  { name: 'music', label: 'Music' },
+  { name: 'sports', label: 'Sports' },
+]
 
 export const CheckBoxGroup = () => {
   const { control, formState: { errors } } = useFormContext<InputFormSchema>()
@@ -8,36 +15,23 @@ export const CheckBoxGroup = () => {
   return (
     <FormControl error={!!errors.checkBoxes}>
       <FormGroup>
-        <Controller
-          name="checkBoxes.coding"
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} />}
-              label="Coding"
-            />
-          )}
-        />
-        <Controller
-          name="checkBoxes.music"
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} />}
-              label="Music"
-            />
-          )}
-        />
-        <Controller
-          name="checkBoxes.sports"
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} />}
-              label="Sports"
-            />
-          )}
-        />
+        {checkBoxOptions.map(option => (
+          <Controller
+            key={option.name}
+            name={`checkBoxes.${option.name}` as keyof InputFormSchema['checkBoxes']} // 型キャストでエラー回避
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                control={<Checkbox {...field} />}
+                label={option.label}
+              />
+            )}
+          />
+        ))}
+        {/* エラーメッセージ */}
+        {errors.checkBoxes && (
+          <FormHelperText>{errors.checkBoxes.message || '少なくとも1つは選択してください'}</FormHelperText>
+        )}
       </FormGroup>
     </FormControl>
   )

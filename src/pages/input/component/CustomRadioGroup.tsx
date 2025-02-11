@@ -19,6 +19,7 @@ export const CustomRadioGroup = () => {
               <RadioGroup {...field}>
                 <FormControlLabel value="slider" control={<Radio />} label="Slider" />
                 <FormControlLabel value="checkbox" control={<Radio />} label="Check Box" />
+                <FormControlLabel value="rating" control={<Radio />} label="Rating" />
                 <FormControlLabel value="unusedOption" control={<Radio />} label="Unused Option" />
               </RadioGroup>
             )}

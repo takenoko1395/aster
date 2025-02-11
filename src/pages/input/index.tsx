@@ -6,6 +6,7 @@ import { ComboBox } from './component/ComboBox'
 import { CustomRadioGroup } from './component/CustomRadioGroup'
 import { CustomSlider } from './component/CustomSlider'
 import { CheckBoxGroup } from './component/CheckBoxGroup'
+import { CustomRating } from './component/CustomRating'
 
 export const Page = () => {
   const methods = useForm({
@@ -31,12 +32,12 @@ export const Page = () => {
             <CustomRadioGroup />
             { selectedOption === 'slider' ? <CustomSlider /> : <></> }
             { selectedOption === 'checkbox' ? <CheckBoxGroup /> : <></> }
-
+            { selectedOption === 'rating' ? <CustomRating /> : <></> }
           </Stack>
           <Box alignContent="right" textAlign="right" marginTop={2}>
             <Button
               type="submit"
-              disabled={!methods.formState.isValid}
+              // disabled={!methods.formState.isValid}
             >
               Submit
             </Button>
