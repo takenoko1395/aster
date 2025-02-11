@@ -1,22 +1,30 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import { Redirect } from '../../components/error/Redirect'
-import { Button, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import { IdentityFormSchema, identityFormSchema } from './types'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCognito } from '../../gateway/api/useCognito'
+import { CustomTextField } from './components/CustomTextField'
+import { useNavigate } from 'react-router-dom'
+import { useIdentity } from '../../hooks/identity/hooks'
 
 export const Page = () => {
   const { signUp } = useCognito()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors } } = useForm({
+  const navigate = useNavigate()
+  const methods = useForm({
     resolver: yupResolver(identityFormSchema),
   })
+  const { setEmail } = useIdentity()
 
   const onSubmit = (data: IdentityFormSchema) => {
-    signUp(data.email, data.password, data.name)
+    try {
+      setEmail(data.email)
+      signUp(data.email, data.password, data.name)
+      void navigate('verification')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -25,16 +33,22 @@ export const Page = () => {
       onReset={() => console.log('Reset!')}
       onError={() => console.log('')}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2}>
-          <TextField {...register('name')} error={!!errors.name} helperText={errors.name?.message} />
-          <TextField {...register('email')} error={!!errors.email} helperText={errors.email?.message} />
-          <TextField {...register('password')} error={!!errors.password} helperText={errors.password?.message} />
-        </Stack>
-        <Button onClick={handleSubmit(onSubmit)} type="submit">
-          Submit
-        </Button>
-      </form>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <Box margin={2}>
+            <Stack spacing={3} direction="column">
+              <CustomTextField label="名前" field="name" />
+              <CustomTextField label="メールアドレス" field="email" />
+              <CustomTextField label="パスワード" field="password" />
+            </Stack>
+            <Box alignContent="right" textAlign="right" marginTop={2}>
+              <Button type="submit">
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </form>
+      </FormProvider>
     </ErrorBoundary>
   )
 }

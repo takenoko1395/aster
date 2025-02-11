@@ -1,5 +1,6 @@
 import { Box, Divider, Typography } from '@mui/material'
 import { AsterError } from '../../domain/model/core/error'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   error: AsterError
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
+  const navigate = useNavigate()
   return (
     <Box>
       <>エラーが発生しました</>
@@ -18,7 +20,12 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
       <Divider />
       <Typography>詳細 : {error.stack}</Typography>
       <Divider />
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <button onClick={() => {
+        resetErrorBoundary()
+        void navigate('/')
+      }}
+      >はじめからやり直す
+      </button>
     </Box>
   )
 }
