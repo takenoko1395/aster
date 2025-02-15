@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Button, Divider, Stack } from '@mui/material'
 import { InputFormSchema, inputFormSchema } from './types'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -26,14 +26,15 @@ export const Page = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Box margin={2}>
-          <Stack spacing={3} direction="column">
-            <ComboBox />
-            <CustomRadioGroup />
+        <Stack margin={2} spacing={3} divider={<Divider />}direction="column">
+          <ComboBox />
+          <CustomRadioGroup />
+          <Stack direction="column">
             { selectedOption === 'slider' ? <CustomSlider /> : <></> }
             { selectedOption === 'checkbox' ? <CheckBoxGroup /> : <></> }
             { selectedOption === 'rating' ? <CustomRating /> : <></> }
           </Stack>
+
           <Box alignContent="right" textAlign="right" marginTop={2}>
             <Button
               type="submit"
@@ -42,20 +43,7 @@ export const Page = () => {
               Submit
             </Button>
           </Box>
-          {/* 結果を表示 */}
-          {/* <Box>
-            {result && (
-              <Stack spacing={2}>
-                <Typography variant="h6">入力内容</Typography>
-                {Object.entries(result).map(([key, value]) => (
-                  <Typography key={key} variant="body1">
-                    {`${key}: ${value}`}
-                  </Typography>
-                ))}
-              </Stack>
-            )}
-          </Box> */}
-        </Box>
+        </Stack>
       </form>
     </FormProvider>
   )

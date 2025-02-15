@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Button,
-  Box,
-} from '@mui/material'
+import { AppBar, Toolbar, Typography, IconButton, Button, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -47,10 +40,17 @@ const Header = () => {
           <Box sx={{ display: 'flex' }}>
             <Button
               color="inherit"
-              onClick={() => handleNavigate('/home')}
+              onClick={() => handleNavigate('/input')}
               sx={{ marginRight: 2 }}
             >
-              Home
+              Input Sample
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => handleNavigate('/output')}
+              sx={{ marginRight: 2 }}
+            >
+              Output Sample
             </Button>
             <Button
               color="inherit"
@@ -58,13 +58,6 @@ const Header = () => {
               sx={{ marginRight: 2 }}
             >
               Identity
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => handleNavigate('/contact')}
-              sx={{ marginRight: 2 }}
-            >
-              Contact
             </Button>
           </Box>
         </Toolbar>

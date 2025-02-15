@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from '../pages/home/App'
 import Identity from '../pages/identity'
 import Input from '../pages/input'
+import Output from '../pages/output'
 import Verification from '../pages/identity/verification'
 import Complete from '../pages/identity/verification/complete'
 import Header from '../components/Header'
@@ -22,11 +23,14 @@ export const AsterRouter = () => {
         <IdentityProvider>
           <Header />
           <Routes>
-            <Route path="/home" element={<App />} />
-            <Route path="/input" element={<Input />} />
-            <Route path="/identity" element={<Identity />} />
-            <Route path="/identity/verification" element={<Verification />} />
-            <Route path="/identity/verification/complete" element={<Complete />} />
+            <Route path="" element={<App />} />
+            <Route path="input" element={<Input />} />
+            <Route path="output" element={<Output />} />
+            <Route path="identity" element={<Identity />}>
+              <Route path="verification" element={<Verification />}>
+                <Route path="complete" element={<Complete />} />
+              </Route>
+            </Route>
           </Routes>
         </IdentityProvider>
 
